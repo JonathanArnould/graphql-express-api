@@ -1,18 +1,7 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
-const { buildSchema } = require("graphql");
-
-// GraphQL Schema
-const schema = buildSchema(`
-    type Query {
-        message: String
-    }
-`);
-
-// Root resolver
-const root = {
-  message: () => "Hello GraphQL!",
-};
+const root = require("./resolver");
+const schema = require("./schema");
 
 // GraphQL endpoint / Express server
 const app = express();
