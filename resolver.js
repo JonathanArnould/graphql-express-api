@@ -7,14 +7,19 @@ const getCourse = (args) => {
   })[0];
 };
 
-const getCourseByTitle = (args) => {
-  const title = args.title;
-  return coursesData.filter((course) => {
-    return course.title === title;
-  })[0];
+const getCoursesByTitle = (args) => {
+  if (args.title) {
+    const title = args.title;
+    return coursesData.filter((course) =>
+      course.title.toLowerCase().includes(title.toLowerCase())
+    );
+  } else {
+    return coursesData;
+  }
 };
 
 const getCourses = (args) => {
+  console.log("ok");
   if (args.topic) {
     const topic = args.topic;
     return coursesData.filter((course) => course.topic === topic);
@@ -34,6 +39,7 @@ const updateCourseTopic = ({ id, topic }) => {
 };
 
 const createCourse = ({ input }) => {
+  console.log(input);
   const newInput = { ...input, id: coursesData.length + 1 };
   coursesData.push(newInput);
   return coursesData;
@@ -41,8 +47,9 @@ const createCourse = ({ input }) => {
 
 const root = {
   course: getCourse,
+  getCoursesByTitle: getCoursesByTitle,
   courses: getCourses,
-  courseByTitle: getCourseByTitle,
+  coursesByTitle: getCoursesByTitle,
   updateCourseTopic: updateCourseTopic,
   createCourse: createCourse,
 };

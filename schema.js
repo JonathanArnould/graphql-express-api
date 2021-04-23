@@ -4,7 +4,7 @@ const { buildSchema } = require("graphql");
 const schema = buildSchema(`
     type Query {
         course(id: Int!): Course
-        courseByTitle(title: String!): Course
+        coursesByTitle(title: String): [Course]
         courses(topic: String): [Course]
     },
     type Mutation {
